@@ -1,0 +1,472 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+
+
+/* reset
+/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
+html {
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%
+}
+
+body {
+    margin: 0
+}
+
+main {
+    display: block
+}
+
+h1 {
+    font-size: 2em;
+    margin: .67em 0
+}
+
+hr {
+    box-sizing: content-box;
+    height: 0;
+    overflow: visible
+}
+
+pre {
+    font-family: monospace, monospace;
+    font-size: 1em
+}
+
+a {
+    background-color: transparent
+}
+
+abbr[title] {
+    border-bottom: none;
+    text-decoration: underline;
+    text-decoration: underline dotted
+}
+
+b, strong {
+    font-weight: bolder
+}
+
+code, kbd, samp {
+    font-family: monospace, monospace;
+    font-size: 1em
+}
+
+small {
+    font-size: 80%
+}
+
+sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline
+}
+
+sub {
+    bottom: -.25em
+}
+
+sup {
+    top: -.5em
+}
+
+img {
+    border-style: none
+}
+
+button, input, optgroup, select, textarea {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    margin: 0
+}
+
+button, input {
+    overflow: visible
+}
+
+button, select {
+    text-transform: none
+}
+
+[type=button], [type=reset], [type=submit], button {
+    -webkit-appearance: button
+}
+
+[type=button]::-moz-focus-inner, [type=reset]::-moz-focus-inner, [type=submit]::-moz-focus-inner, button::-moz-focus-inner {
+    border-style: none;
+    padding: 0
+}
+
+[type=button]:-moz-focusring, [type=reset]:-moz-focusring, [type=submit]:-moz-focusring, button:-moz-focusring {
+    outline: 1px dotted ButtonText
+}
+
+fieldset {
+    padding: .35em .75em .625em
+}
+
+legend {
+    box-sizing: border-box;
+    color: inherit;
+    display: table;
+    max-width: 100%;
+    padding: 0;
+    white-space: normal
+}
+
+progress {
+    vertical-align: baseline
+}
+
+textarea {
+    overflow: auto
+}
+
+[type=checkbox], [type=radio] {
+    box-sizing: border-box;
+    padding: 0
+}
+
+[type=number]::-webkit-inner-spin-button, [type=number]::-webkit-outer-spin-button {
+    height: auto
+}
+
+[type=search] {
+    -webkit-appearance: textfield;
+    outline-offset: -2px
+}
+
+[type=search]::-webkit-search-decoration {
+    -webkit-appearance: none
+}
+
+::-webkit-file-upload-button {
+    -webkit-appearance: button;
+    font: inherit
+}
+
+details {
+    display: block
+}
+
+summary {
+    display: list-item
+}
+
+template {
+    display: none
+}
+
+[hidden] {
+    display: none
+}
+
+
+/* end Reset */
+body {
+    font-family: 'Lato', sans-serif;
+}
+
+header {
+    text-align: center;
+    margin-top: 2%;
+}
+
+header h1 {
+    color: #D04F4F;
+}
+
+.all-recipes {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 70px;
+    text-align: center;
+    margin-top: 9%;
+}
+
+.image-of-recipes {
+    width: 380px;
+    height: 200px;
+}
+
+.info-of-recipes {
+    width: 380px;
+    margin: auto;
+    height: 180px;
+    margin-top: -1%;
+    background-color: #E7E7E7;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.name-timer h1, .name-timer p {
+    font-size: 18px;
+    margin-top: 4%;
+    margin-bottom: 4%;
+}
+
+.name-timer h1 {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.timmer img {
+    margin-right: 8%;
+}
+
+.name-timer {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin-left: 2.5%;
+}
+
+.name-timer p {
+    white-space: nowrap;
+    margin-right: 4%;
+}
+
+.timmer {
+    display: flex;
+    flex-direction: row-reverse;
+    width: 30%;
+}
+
+.ingredient-recipes {
+    display: flex;
+    justify-content: space-around;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    margin-top: auto;
+    margin-bottom: auto;
+    align-items: baseline;
+}
+
+.ingredient-recipes label {
+    font-size: 12px;
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+}
+
+.desc-howDo, .ingredient-recipes label {
+    width: 100%;
+    margin-left: 5%;
+
+}
+
+.ingredient-list {
+    display: flex;
+    flex-direction: column;
+    white-space: nowrap;
+    align-items: center;
+}
+
+
+.ingredient-recipes div label {
+    font-weight: 700;
+    height: 20px;
+}
+
+.ingredient-recipes div label p {
+    font-weight: normal;
+}
+
+.ingredient-list p {
+    margin-left: 2%;
+}
+
+.ingredient-recipes div {
+    width: 100%;
+    line-height: 0.4;
+    margin-top: 2%;
+}
+
+.d-flex {
+    justify-content: center;
+}
+
+.form-control {
+    width: 96%;
+    height: 69px;
+    border: none;
+    border-radius: 5px;
+    padding-left: 25px;
+    background: #E7E7E7 url(../assets/svg/search.svg) no-repeat center right 10px;
+    margin-left: 0.5%;
+    margin-left: 2%;
+}
+
+#selector {
+    display: flex;
+    margin-top: 4%;
+}
+
+.button-list {
+    display: flex;
+    gap: 1%;
+    position: absolute;
+    z-index: 2;
+    width: 50%;
+    margin-left: 2%;
+}
+
+
+/* 
+gap: 2%;
+position: absolute;
+z-index: 2;
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
+max-width: 100%; */
+
+
+
+.btn {
+    width: 170px;
+    height: 69px;
+    color: white;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.ingredient, .appliance, .ustensil {
+    display: flex;
+    flex-direction: column;
+    /* width: 30%; */
+}
+
+.input-ustensil input, .input-ingredient input, .input-appliance input {
+    width: 80%;
+    border: none;
+    padding: 5%;
+    font-size: 18px;
+    background-color: #ED6454;
+    color: #fff;
+
+}
+
+.input-ustensil input::placeholder, .input-ingredient input::placeholder, .input-appliance input::placeholder {
+    color: #fff;
+}
+
+
+.ingredient button, .ingredient button:hover, .ingredient input, .ingredient input::placeholder, .list-ingredient {
+    background-color: #3282F7;
+    color: #FFFFFF;
+    border-radius: 5px;
+    border: none;
+}
+
+.appliance button, .appliance button:hover, .appliance input, .appliance input::placeholder, .list-appliance {
+    background-color: #68D9A4;
+    color: #FFFFFF;
+    border-radius: 5px;
+    border: none;
+}
+
+.ustensil button, .ustensil button:hover, .list-ustensil {
+    background-color: #ED6454;
+    color: #FFFFFF;
+    border-radius: 5px;
+    border: none;
+}
+
+
+.list-ingredient li, .list-ustensil li, .list-appliance li {
+    list-style-type: none;
+}
+
+.list-ingredient li:hover, .list-ustensil li:hover, .list-appliance li:hover {
+    border-bottom: solid #FFF 1px;
+    cursor: pointer;
+}
+
+.list-ingredient, .list-ustensil, .list-appliance {
+    display: -ms-grid;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    overflow-wrap: break-word;
+    width: 570px;
+    max-height: 310px;
+    overflow: auto;
+    color: white;
+    margin: auto;
+    row-gap: 3px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    margin-top: -4px;
+}
+
+.list-ustensil {
+    width: 400px;
+}
+
+.list-appliance {
+    width: 278px;
+}
+
+
+.addTag {
+    margin-left: 2%;
+    margin-top: 2%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.addTag button {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 130px;
+    justify-content: space-between;
+    border: none;
+    height: 37px;
+    border-radius: 5px;
+    align-items: center;
+}
+
+.ingredientTag {
+    background-color: #3282F7;
+    color: #fff;
+}
+
+.applianceTag {
+    background-color: #68D9A4;
+    color: #fff;
+}
+
+.ustensilTag {
+    background-color: #ED6454;
+    color: #fff;
+}
+
+
+
+
+
+.input-ustensil, .input-appliance, .input-ingredient {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    width: auto;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.input-appliance {
+    background-color: #68D9A4;
+}
+
+.input-ustensil {
+    background-color: #ED6454;
+}
+
+.input-ingredient {
+    background-color: #3282F7;
+}
