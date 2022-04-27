@@ -11,15 +11,19 @@ export class Tags {
 
         ingredientTag.forEach(ingTag => {
             ingTag.addEventListener("click", (e) => {
-                console.log(ingTag)
+
                 const close = document.createElement("img");
                 close.classList.add("close-tag")
                 close.src = "./assets/svg/close.svg";
-                const labelOfIngredient = document.createElement("button");
-                labelOfIngredient.classList.add("tag", "ingredientTag")
-                labelOfIngredient.textContent = ingTag.textContent;
-                addNewTag.appendChild(labelOfIngredient)
-                labelOfIngredient.appendChild(close);
+                close.addEventListener("click", this.removeTag)
+
+                const buttonOfIngredient = document.createElement("button");
+                buttonOfIngredient.classList.add("tag", "ingredientTag")
+                buttonOfIngredient.textContent = ingTag.textContent;
+
+
+                addNewTag.appendChild(buttonOfIngredient)
+                buttonOfIngredient.appendChild(close);
 
             });
         });
@@ -29,34 +33,38 @@ export class Tags {
                 const close = document.createElement("img");
                 close.classList.add("close-tag")
                 close.src = "./assets/svg/close.svg";
-                console.log(appTag)
-                const labelOfAppliance = document.createElement("button");
-                labelOfAppliance.classList.add("tag", "applianceTag")
-                labelOfAppliance.textContent = appTag.textContent;
-                addNewTag.appendChild(labelOfAppliance)
-                labelOfAppliance.appendChild(close);
+                close.addEventListener("click", this.removeTag)
+
+                const buttonOfAppliance = document.createElement("button");
+                buttonOfAppliance.classList.add("tag", "applianceTag")
+                buttonOfAppliance.textContent = appTag.textContent;
+
+                addNewTag.appendChild(buttonOfAppliance)
+                buttonOfAppliance.appendChild(close);
             });
         });
 
         ustensilTag.forEach(usteTag => {
             usteTag.addEventListener("click", (e) => {
                 const close = document.createElement("img");
+                close.addEventListener("click", this.removeTag)
                 close.classList.add("close-tag")
                 close.src = "./assets/svg/close.svg";
-                console.log(usteTag)
-                const labelOfUstensil = document.createElement("button");
-                labelOfUstensil.classList.add("tag", "ustensilTag")
-                labelOfUstensil.textContent = usteTag.textContent;
-                addNewTag.appendChild(labelOfUstensil)
-                labelOfUstensil.appendChild(close);
+
+                const buttonOfUstensils = document.createElement("button");
+                buttonOfUstensils.classList.add("tag", "ustensilTag")
+                buttonOfUstensils.textContent = usteTag.textContent;
+
+                addNewTag.appendChild(buttonOfUstensils)
+                buttonOfUstensils.appendChild(close);
             });
         });
 
-        addNewTag.addEventListener("click", this.removeTag)
     }
 
     removeTag(e) {
         let element = e.target.parentNode;
+        console.log(e.target)
         element.parentNode.removeChild(element);
     }
 }
