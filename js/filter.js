@@ -1,8 +1,14 @@
+import { ingredienTag } from "./tag.js";
+import { ustensilTag } from "./tag.js";
+import { applianceTag } from "./tag.js";
+
+
+
 export class Filters {
     constructor(recipes) {
         this.recipes = recipes;
-        console.log(this.recipes)
     }
+
     getIngredients() {
         const divOfListButton = document.querySelector(".button-list");
 
@@ -15,6 +21,8 @@ export class Filters {
 
         const inputOfIngredient = document.createElement("input");
         inputOfIngredient.placeholder = "Rechercher un ingrédient";
+        inputOfIngredient.type = "text";
+        inputOfIngredient.setAttribute('id', 'search-Ingredients-List');
         inputOfIngredient.style.display = "none";
 
         const div = document.createElement("div");
@@ -42,19 +50,39 @@ export class Filters {
         div.appendChild(iconUp)
 
 
+
         let ingredients = [];
         this.recipes.forEach(recipe => {
             recipe.ingredients.forEach(e => {
-                ingredients.push(e.ingredient);
+                ingredients.push(e.ingredient.toLowerCase());
             });
         });
         let newIngredient = this.deleteAllDuplicates(ingredients);
+        ingredienTag()
         newIngredient.forEach(e => {
             const listOfIngredient = document.createElement("li");
             listOfIngredient.classList.add("ingredient-Tag");
             listOfIngredient.textContent = e;
             ulOfIngredient.appendChild(listOfIngredient);
         })
+
+
+        const searchInputIngredient = document.getElementById("search-Ingredients-List");
+        searchInputIngredient.addEventListener("keyup", function () {
+            const listContainer = document.querySelector(".list-ingredient");
+            const input = searchInputIngredient.value;
+            const result = newIngredient.filter(item => item.toLowerCase().includes(input.toLowerCase()));
+            listContainer.innerHTML = "";
+            result.forEach(resultItem => {
+                const listOfIngredientFilter = document.createElement("li");
+                listOfIngredientFilter.classList.add("ingredient-Tag");
+                listOfIngredientFilter.textContent = resultItem;
+                ulOfIngredient.appendChild(listOfIngredientFilter)
+            })
+            ingredienTag()
+        })
+
+
         buttonOfIngredient.addEventListener("click", (e) => {
             if (ulOfIngredient.style.display && inputOfIngredient.style.display && iconUp.style.display == "none") {
                 buttonOfIngredient.style.display = "none";
@@ -77,9 +105,13 @@ export class Filters {
             }
         });
 
+        // this.SearchListIngredient();
         ingredient.appendChild(ulOfIngredient);
         return ingredients
     }
+
+
+
 
     getAppliances() {
         /**
@@ -104,6 +136,8 @@ export class Filters {
 
         const inputOfAppliance = document.createElement("input")
         inputOfAppliance.placeholder = "Rechercher un appareil"
+        inputOfAppliance.type = "text";
+        inputOfAppliance.setAttribute('id', 'search-Appliance-List');
         inputOfAppliance.style.display = "none"
 
         const div = document.createElement("div");
@@ -127,19 +161,38 @@ export class Filters {
          */
         let appliance = [];
         this.recipes.forEach(recipe => {
-            appliance.push(recipe.appliance)
+            appliance.push(recipe.appliance.toLowerCase())
         });
         /**
          *  delete all the duplicates and redo a foreach to display all our elements in the list
          */
         let newAppliance = this.deleteAllDuplicates(appliance)
         // newAppliance == this.sortByName();
-        console.log(newAppliance)
+        // console.log(newAppliance)
         newAppliance.forEach(e => {
             const liOfAppliance = document.createElement("li");
             liOfAppliance.classList.add("appliance-Tag");
             liOfAppliance.textContent = e
             ulOfAppliance.appendChild(liOfAppliance)
+        })
+
+
+        const searchInputAppliance = document.getElementById("search-Appliance-List");
+
+        searchInputAppliance.addEventListener("keyup", function () {
+            const input = searchInputAppliance.value;
+            const result = newAppliance.filter(item => item.toLowerCase().includes(input.toLowerCase()));
+
+            const listContainer = document.querySelector(".list-appliance");
+            listContainer.innerHTML = "";
+
+            result.forEach(resultItem => {
+                const listOfApplianceFilter = document.createElement("li");
+                listOfApplianceFilter.classList.add("appliance-Tag");
+                listOfApplianceFilter.textContent = resultItem;
+                ulOfAppliance.appendChild(listOfApplianceFilter)
+            })
+            applianceTag();
         })
         /**
          * when you click on the button it is hidden and displays the input and the appliance list
@@ -192,6 +245,8 @@ export class Filters {
 
         const inputOfUstensils = document.createElement("input");
         inputOfUstensils.placeholder = "Rechercher un ustensils";
+        inputOfUstensils.type = "text";
+        inputOfUstensils.setAttribute('id', 'search-Ustensils-List');
         inputOfUstensils.style.display = "none";
 
 
@@ -218,7 +273,7 @@ export class Filters {
         let ustensils = [];
         this.recipes.forEach(recipe => {
             recipe.ustensils.forEach(e => {
-                ustensils.push(e);
+                ustensils.push(e.toLowerCase());
             })
         });
         /**
@@ -230,6 +285,25 @@ export class Filters {
             listOfUstensil.classList.add("ustensil-Tag");
             listOfUstensil.textContent = e;
             ulUstensil.appendChild(listOfUstensil);
+        })
+
+
+        const searchInputUstensils = document.getElementById("search-Ustensils-List");
+
+        searchInputUstensils.addEventListener("keyup", function () {
+            const input = searchInputUstensils.value;
+            const result = newUstensils.filter(item => item.toLowerCase().includes(input.toLowerCase()));
+
+            const listContainer = document.querySelector(".list-ustensil");
+            listContainer.innerHTML = "";
+
+            result.forEach(resultItem => {
+                const listOfUstensilsFilter = document.createElement("li");
+                listOfUstensilsFilter.classList.add("ustensil-Tag");
+                listOfUstensilsFilter.textContent = resultItem;
+                ulUstensil.appendChild(listOfUstensilsFilter)
+            })
+            ustensilTag();
         })
         /**
          * when you click on the button it is hidden and displays the input and the ustensil list

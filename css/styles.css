@@ -291,14 +291,14 @@ header h1 {
 }
 
 .form-control {
-    width: 96%;
+    width: 94.5%;
     height: 69px;
     border: none;
     border-radius: 5px;
     padding-left: 25px;
     background: #E7E7E7 url(../assets/svg/search.svg) no-repeat center right 10px;
-    margin-left: 0.5%;
-    margin-left: 2%;
+    margin-left: 1.8%;
+    align-items: center;
 }
 
 #selector {
@@ -312,7 +312,7 @@ header h1 {
     position: absolute;
     z-index: 2;
     width: 50%;
-    margin-left: 2%;
+    margin-left: 1.8%;
 }
 
 

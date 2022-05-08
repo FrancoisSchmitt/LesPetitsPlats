@@ -1,38 +1,45 @@
 import { recipes } from "../data/recipes.js";
-import { Recipe } from "./template/tempRecipe.js";
+import { Recipes } from "./recipe.js";
 import { Filters } from "./filter.js";
-import { Tags } from "./tag.js";
+// import { Tags } from "./tag.js";
+import { ingredienTag } from "./tag.js";
+import { ustensilTag } from "./tag.js";
+import { applianceTag } from "./tag.js";
 
+import { Searchbar } from "./searchBar.js"
 
-class mainApp {
+class App {
     static init() {
-        new mainApp(recipes);
+        new App(recipes);
     }
     constructor(recipes) {
         this.recipes = recipes;
-        this.launchRecipes();
+        this.launchSearchBar();
         this.launchFilters();
+        this.launchRecipes();
         this.launchTag();
     }
-    launchRecipes() {
-        const resultSection = document.querySelector(".all-recipes");
-        resultSection.innerHTML = "";
-        this.recipes.forEach(element => {
-            const recipeDOM = new Recipe(element);
-            resultSection.appendChild(recipeDOM.createRecipe());
-        });
+
+    launchSearchBar() {
+        new Searchbar();
     }
+
     launchFilters() {
-        const listFilter = new Filters(this.recipes);
-        listFilter.getIngredients();
-        listFilter.getAppliances();
-        listFilter.getUstensils();
+        const filtersList = new Filters(this.recipes);
+        filtersList.getIngredients();
+        filtersList.getAppliances();
+        filtersList.getUstensils();
     }
 
     launchTag() {
-        const tag = new Tags(this.recipes)
-        tag.addTag();
+        const ingTag = new ingredienTag();
+        const appTag = new applianceTag();
+        const ustTag = new ustensilTag();
+
+    }
+    launchRecipes() {
+        new Recipes(this.recipes);
     }
 }
 
-mainApp.init();
+App.init();
