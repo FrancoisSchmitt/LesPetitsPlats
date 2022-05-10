@@ -3,7 +3,6 @@ import { ustensilTag } from "./tag.js";
 import { applianceTag } from "./tag.js";
 
 
-
 export class Filters {
     constructor(recipes) {
         this.recipes = recipes;
@@ -50,15 +49,14 @@ export class Filters {
         div.appendChild(iconUp)
 
 
-
         let ingredients = [];
         this.recipes.forEach(recipe => {
             recipe.ingredients.forEach(e => {
                 ingredients.push(e.ingredient.toLowerCase());
             });
         });
+
         let newIngredient = this.deleteAllDuplicates(ingredients);
-        ingredienTag()
         newIngredient.forEach(e => {
             const listOfIngredient = document.createElement("li");
             listOfIngredient.classList.add("ingredient-Tag");
@@ -105,13 +103,10 @@ export class Filters {
             }
         });
 
-        // this.SearchListIngredient();
+
         ingredient.appendChild(ulOfIngredient);
         return ingredients
     }
-
-
-
 
     getAppliances() {
         /**
@@ -334,8 +329,6 @@ export class Filters {
         ustensil.appendChild(ulUstensil)
         return ustensils
     }
-
-
 
     deleteAllDuplicates(arrTwo) {
         const filteredArray = arrTwo.filter(function (ele, pos) {

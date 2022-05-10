@@ -17,6 +17,7 @@ class App {
         this.launchSearchBar();
         this.launchFilters();
         this.launchRecipes();
+
         this.launchTag();
     }
 
@@ -29,6 +30,7 @@ class App {
         filtersList.getIngredients();
         filtersList.getAppliances();
         filtersList.getUstensils();
+
     }
 
     launchTag() {

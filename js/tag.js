@@ -3,6 +3,7 @@ import { tagFilterAlgo } from "./algo/algo.js";
 
 
 
+
 const addNewTag = document.querySelector(".addTag");
 
 export function ingredienTag() {
@@ -22,8 +23,8 @@ export function ingredienTag() {
 
             addNewTag.appendChild(buttonOfIngredient)
             buttonOfIngredient.appendChild(close);
-            tagFilterAlgo();
             close.addEventListener("click", removeTag)
+            tagFilterAlgo();
 
         });
     });
@@ -74,6 +75,8 @@ export function ustensilTag() {
     });
 
 }
+
+
 
 function removeTag(e) {
     let element = e.target.parentNode;
