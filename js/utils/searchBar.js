@@ -1,4 +1,4 @@
-import { searchBarAlgo } from "./algo/algo.js";
+import { searchBarAlgo } from "../algo/algo.js";
 
 
 export class Searchbar {

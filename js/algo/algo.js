@@ -1,10 +1,10 @@
 import { recipes } from "../../data/recipes.js";
-import { Recipes } from "../recipe.js"
-import { ingredienTag } from "../tag.js";
-import { ustensilTag } from "../tag.js";
-import { applianceTag } from "../tag.js";
+import { Recipes } from "../utils/recipe.js"
+import { ingredienTag } from "../utils/add-newtag.js";
+import { ustensilTag } from "../utils/add-newtag.js";
+import { applianceTag } from "../utils/add-newtag.js";
 
-import { Filters } from "../filter.js";
+import { Filters } from "../template/render-list.js";
 
 
 
@@ -18,8 +18,12 @@ let filter = recipes;
 export function searchBarAlgo() {
     const inputSearch = document.querySelector("#search").value.toLowerCase();
     const allTagsFilters = Array.from(document.querySelectorAll(".addTag button"));
-    const everUl = document.querySelector(".list-ingredient");
-    everUl.innerHTML = ""
+    const lstIng = document.querySelector(".list-ingredient");
+    lstIng.innerHTML = ""
+    const lstApli = document.querySelector(".list-appliance");
+    lstApli.innerHTML = ""
+    const lstUst = document.querySelector(".list-ustensil");
+    lstUst.innerHTML = ""
     if (inputSearch.length >= 3) {
         recipeSearch = recipeSearch.filter(element => {
             const ifSearchBarMatch = searchBarMatch(inputSearch, element);

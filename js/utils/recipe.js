@@ -1,4 +1,4 @@
-import { Recipe } from "./template/tempRecipe.js";
+import { Recipe } from "../template/render-recipe.js";
 
 export class Recipes {
     constructor(recipes) {

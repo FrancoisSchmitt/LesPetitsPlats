@@ -1,12 +1,12 @@
 import { recipes } from "../data/recipes.js";
-import { Recipes } from "./recipe.js";
-import { Filters } from "./filter.js";
+import { Recipes } from "./utils/recipe.js";
+import { Filters } from "./template/render-list.js";
 // import { Tags } from "./tag.js";
-import { ingredienTag } from "./tag.js";
-import { ustensilTag } from "./tag.js";
-import { applianceTag } from "./tag.js";
+import { ingredienTag } from "./utils/add-newtag.js";
+import { ustensilTag } from "./utils/add-newtag.js";
+import { applianceTag } from "./utils/add-newtag.js";
 
-import { Searchbar } from "./searchBar.js"
+import { Searchbar } from "./utils/searchBar.js"
 
 class App {
     static init() {

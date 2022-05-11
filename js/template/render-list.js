@@ -1,6 +1,6 @@
-import { ingredienTag } from "./tag.js";
-import { ustensilTag } from "./tag.js";
-import { applianceTag } from "./tag.js";
+import { ingredienTag } from "../utils/add-newtag.js";
+import { ustensilTag } from "../utils/add-newtag.js";
+import { applianceTag } from "../utils/add-newtag.js";
 
 
 export class Filters {

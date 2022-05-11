@@ -1,5 +1,5 @@
 
-import { tagFilterAlgo } from "./algo/algo.js";
+import { tagFilterAlgo } from "../algo/algo.js";
 
 
 
