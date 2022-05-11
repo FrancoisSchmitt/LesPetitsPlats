@@ -18,7 +18,8 @@ let filter = recipes;
 export function searchBarAlgo() {
     const inputSearch = document.querySelector("#search").value.toLowerCase();
     const allTagsFilters = Array.from(document.querySelectorAll(".addTag button"));
-
+    const everUl = document.querySelector(".list-ingredient");
+    everUl.innerHTML = ""
     if (inputSearch.length >= 3) {
         recipeSearch = recipeSearch.filter(element => {
             const ifSearchBarMatch = searchBarMatch(inputSearch, element);
@@ -29,6 +30,8 @@ export function searchBarAlgo() {
         });
         if (recipeSearch.length >= 3) {
             new Recipes(recipeSearch);
+            newFiltersList(recipeSearch);
+
         }
         else {
             const newResultErrorOfRecipes = document.querySelector(".all-recipes");
@@ -72,6 +75,12 @@ function searchBarMatch(inputSearch, recipes) {
 export function tagFilterAlgo() {
     const inputSearch = document.querySelector("#search").value.toLowerCase();
     const allTagsFilters = Array.from(document.querySelectorAll(".addTag button"));
+    const lstIng = document.querySelector(".list-ingredient");
+    lstIng.innerHTML = ""
+    const lstApli = document.querySelector(".list-appliance");
+    lstApli.innerHTML = ""
+    const lstUst = document.querySelector(".list-ustensil");
+    lstUst.innerHTML = ""
 
 
     console.log(allTagsFilters)
@@ -81,7 +90,8 @@ export function tagFilterAlgo() {
             matchTagAlgo(alltagFitltered);
         });
         new Recipes(newTagTabRecipes);
-        newFiltersList(newTagTabRecipes)
+        newFiltersList(newTagTabRecipes);
+
         console.log(newTagTabRecipes)
         filter = newTagTabRecipes;
         newTagTabRecipes = recipeSearch;
@@ -92,7 +102,6 @@ export function tagFilterAlgo() {
     }
 
     else {
-
         searchBarAlgo();
     }
 }
@@ -134,6 +143,8 @@ function newFiltersList(recipes) {
     const appliances = filtersList.getAppliances();
     const ustensils = filtersList.getUstensils();
     ingredienTag()
+    ustensilTag()
+    applianceTag()
 
 }
 

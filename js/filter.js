@@ -9,44 +9,21 @@ export class Filters {
     }
 
     getIngredients() {
-        const divOfListButton = document.querySelector(".button-list");
+        const ingredient = document.querySelector(".ingredient");
 
-        const ingredient = document.createElement("div");
-        ingredient.classList.add("ingredient");
+        const ulOfIngredient = document.querySelector(".list-ingredient");
+        ulOfIngredient.style.display = "none"
 
-        const ulOfIngredient = document.createElement("ul");
-        ulOfIngredient.classList.add("list-ingredient");
-        ulOfIngredient.style.display = "none";
-
-        const inputOfIngredient = document.createElement("input");
-        inputOfIngredient.placeholder = "Rechercher un ingrédient";
-        inputOfIngredient.type = "text";
-        inputOfIngredient.setAttribute('id', 'search-Ingredients-List');
+        const inputOfIngredient = document.querySelector("#search-Ingredients-List");
         inputOfIngredient.style.display = "none";
 
-        const div = document.createElement("div");
-        div.classList.add("input-ingredient");
+        const iconUpIng = document.querySelector(".iconUpIng");
+        iconUpIng.style.display = "none"
 
-        const iconUp = document.createElement('i');
-        iconUp.classList.add("fa-solid", "fa-angle-up");
-        iconUp.style.display = "none"
-
-        const buttonOfIngredient = document.createElement("button");
-        buttonOfIngredient.classList.add("btn");
-        buttonOfIngredient.setAttribute('id', 'ingredient');
-        buttonOfIngredient.textContent = "Ingrédient";
+        const buttonOfIngredient = document.querySelector("#ingredient");
         buttonOfIngredient.style.display = "flex";
 
-        const icon = document.createElement('i');
-        icon.classList.add("fa-solid", "fa-angle-down");
-
-
-        buttonOfIngredient.appendChild(icon)
-        divOfListButton.appendChild(ingredient);
-        ingredient.appendChild(buttonOfIngredient);
-        ingredient.appendChild(div);
-        div.appendChild(inputOfIngredient)
-        div.appendChild(iconUp)
+        const iconIng = document.querySelector(".iconDownIng");
 
 
         let ingredients = [];
@@ -64,7 +41,6 @@ export class Filters {
             ulOfIngredient.appendChild(listOfIngredient);
         })
 
-
         const searchInputIngredient = document.getElementById("search-Ingredients-List");
         searchInputIngredient.addEventListener("keyup", function () {
             const listContainer = document.querySelector(".list-ingredient");
@@ -80,31 +56,24 @@ export class Filters {
             ingredienTag()
         })
 
-
         buttonOfIngredient.addEventListener("click", (e) => {
-            if (ulOfIngredient.style.display && inputOfIngredient.style.display && iconUp.style.display == "none") {
+            if (ulOfIngredient.style.display && inputOfIngredient.style.display && iconUpIng.style.display == "none") {
                 buttonOfIngredient.style.display = "none";
                 ulOfIngredient.style.display = "grid";
-                iconUp.style.display = "flex"
+                iconUpIng.style.display = "flex"
                 inputOfIngredient.style.display = "flex";
-            }
-            else {
-                ulOfIngredient.style.display = "none";
-                inputOfIngredient.style.display = "none";
             }
         })
 
-        iconUp.addEventListener("click", (e) => {
+        iconUpIng.addEventListener("click", (e) => {
             if (buttonOfIngredient.style.display == "none") {
                 buttonOfIngredient.style.display = "flex";
                 ulOfIngredient.style.display = "none";
-                iconUp.style.display = "none"
+                iconUpIng.style.display = "none"
                 inputOfIngredient.style.display = "none";
             }
         });
 
-
-        ingredient.appendChild(ulOfIngredient);
         return ingredients
     }
 
@@ -112,45 +81,33 @@ export class Filters {
         /**
          *  Create element HTML with javascript. 
          */
-        const divOfListButton = document.querySelector(".button-list")
-
-        const appliances = document.createElement("div")
-        appliances.classList.add("appliance");
-
-        const buttonOfAppliance = document.createElement("button");
-        buttonOfAppliance.classList.add("btn")
-        buttonOfAppliance.setAttribute('id', 'Appliance');
-        buttonOfAppliance.textContent = "Appareil"
 
 
-        const icon = document.createElement('i');
-        icon.classList.add("fa-solid", "fa-angle-down");
+        const appliances = document.querySelector(".appliance")
+
+        const buttonOfAppliance = document.querySelector("#appliance");
+        buttonOfAppliance.style.display = "flex"
+
+        const iconAppl = document.querySelector('.iconDownAppl');
 
 
-        buttonOfAppliance.appendChild(icon)
-
-        const inputOfAppliance = document.createElement("input")
-        inputOfAppliance.placeholder = "Rechercher un appareil"
-        inputOfAppliance.type = "text";
-        inputOfAppliance.setAttribute('id', 'search-Appliance-List');
+        const inputOfAppliance = document.querySelector("#search-Appliance-List")
         inputOfAppliance.style.display = "none"
 
-        const div = document.createElement("div");
-        div.classList.add("input-appliance");
+        const iconUpAppl = document.querySelector('.iconUpAppl');
+        iconUpAppl.style.display = "none"
 
-        const iconUp = document.createElement('i');
-        iconUp.classList.add("fa-solid", "fa-angle-up");
-        iconUp.style.display = "none"
 
-        const ulOfAppliance = document.createElement("ul")
-        ulOfAppliance.classList.add("list-appliance");
+
+        const ulOfAppliance = document.querySelector(".list-appliance")
         ulOfAppliance.style.display = "none"
 
-        divOfListButton.appendChild(appliances)
-        appliances.appendChild(buttonOfAppliance)
-        appliances.appendChild(div);
-        div.appendChild(inputOfAppliance)
-        div.appendChild(iconUp)
+
+
+
+
+
+
         /**
          * create an array and do foreach to get the data that are in the object data/recipe.js
          */
@@ -165,22 +122,19 @@ export class Filters {
         // newAppliance == this.sortByName();
         // console.log(newAppliance)
         newAppliance.forEach(e => {
+            console.log(newAppliance)
             const liOfAppliance = document.createElement("li");
             liOfAppliance.classList.add("appliance-Tag");
             liOfAppliance.textContent = e
             ulOfAppliance.appendChild(liOfAppliance)
         })
-
-
         const searchInputAppliance = document.getElementById("search-Appliance-List");
 
         searchInputAppliance.addEventListener("keyup", function () {
             const input = searchInputAppliance.value;
             const result = newAppliance.filter(item => item.toLowerCase().includes(input.toLowerCase()));
-
             const listContainer = document.querySelector(".list-appliance");
             listContainer.innerHTML = "";
-
             result.forEach(resultItem => {
                 const listOfApplianceFilter = document.createElement("li");
                 listOfApplianceFilter.classList.add("appliance-Tag");
@@ -193,27 +147,23 @@ export class Filters {
          * when you click on the button it is hidden and displays the input and the appliance list
          */
         buttonOfAppliance.addEventListener("click", (e) => {
-            if (ulOfAppliance.style.display && inputOfAppliance.style.display && iconUp.style.display == "none") {
+            if (ulOfAppliance.style.display && inputOfAppliance.style.display && iconUpAppl.style.display == "none") {
                 buttonOfAppliance.style.display = "none"
                 ulOfAppliance.style.display = "grid"
-                iconUp.style.display = "flex"
+                iconUpAppl.style.display = "flex"
                 inputOfAppliance.style.display = "flex"
-            }
-            else {
-                ulOfAppliance.style.display = "none"
-                inputOfAppliance.style.display = "none"
             }
         })
 
-        iconUp.addEventListener("click", (e) => {
+        iconUpAppl.addEventListener("click", (e) => {
             if (buttonOfAppliance.style.display == "none") {
                 buttonOfAppliance.style.display = "flex";
-                ulOfAppliance.style.display = "none";
-                iconUp.style.display = "none"
+                iconAppl.style.display = "flex"
+                iconUpAppl.style.display = "none"
                 inputOfAppliance.style.display = "none";
             }
         });
-        appliances.appendChild(ulOfAppliance)
+        // appliances.appendChild(ulOfAppliance)
         return appliance
     }
 
@@ -221,47 +171,27 @@ export class Filters {
         /**
          *  Create element HTML with javascript. 
          */
-        const divOfListButton = document.querySelector(".button-list");
 
-        const ustensil = document.createElement("div");
-        ustensil.classList.add("ustensil")
-
-        const buttonOfUstensils = document.createElement("button");
-        buttonOfUstensils.classList.add("btn");
-        buttonOfUstensils.setAttribute('id', 'Ustensil');
-        buttonOfUstensils.textContent = "Ustensils";
+        // const ustensil = document.querySelector(".ustensil");
 
 
-        const icon = document.createElement('i');
-        icon.classList.add("fa-solid", "fa-angle-down");
+        const buttonOfUstensils = document.querySelector("#ustensil");
+        buttonOfUstensils.style.display = "flex"
 
+        const iconDownUst = document.querySelector('.iconDownUst');
 
-        buttonOfUstensils.appendChild(icon)
-
-        const inputOfUstensils = document.createElement("input");
-        inputOfUstensils.placeholder = "Rechercher un ustensils";
-        inputOfUstensils.type = "text";
-        inputOfUstensils.setAttribute('id', 'search-Ustensils-List');
+        const inputOfUstensils = document.querySelector("#search-Ustensils-List");
         inputOfUstensils.style.display = "none";
 
 
-        const iconUp = document.createElement('i');
-        iconUp.classList.add("fa-solid", "fa-angle-up");
-        iconUp.style.display = "none"
+        const iconUpUst = document.querySelector('.iconUpUst');
+        iconUpUst.style.display = "none"
 
-        const div = document.createElement("div");
-        div.classList.add("input-ustensil")
+        // const div = document.querySelector(".input-ustensil");
 
-
-        const ulUstensil = document.createElement("ul");
-        ulUstensil.classList.add("list-ustensil");
+        const ulUstensil = document.querySelector(".list-ustensil");
         ulUstensil.style.display = "none";
 
-        divOfListButton.appendChild(ustensil);
-        ustensil.appendChild(buttonOfUstensils);
-        ustensil.appendChild(div);
-        div.appendChild(inputOfUstensils)
-        div.appendChild(iconUp)
         /**
          * create an array and do foreach to get the data that are in the object data/recipe.js
          */
@@ -304,29 +234,25 @@ export class Filters {
          * when you click on the button it is hidden and displays the input and the ustensil list
          */
         buttonOfUstensils.addEventListener("click", (e) => {
-            if (ulUstensil.style.display && inputOfUstensils.style.display && iconUp.style.display == "none") {
+            if (ulUstensil.style.display && inputOfUstensils.style.display && iconUpUst.style.display == "none") {
                 buttonOfUstensils.style.display = "none";
                 ulUstensil.style.display = "grid";
-                iconUp.style.display = "flex"
+                iconUpUst.style.display = "flex"
                 inputOfUstensils.style.display = "flex";
-            }
-            else {
-                ulUstensil.style.display = "none";
-                inputOfUstensils.style.display = "none";
             }
         })
 
 
-        iconUp.addEventListener("click", (e) => {
-            if (buttonOfUstensils.style.display == "none") {
+        iconUpUst.addEventListener("click", (e) => {
+            if (buttonOfUstensils.style.display === "none") {
                 buttonOfUstensils.style.display = "flex";
-                ulUstensil.style.display = "none";
-                iconUp.style.display = "none"
+                iconUpUst.style.display = "none"
+                iconDownUst.style.display = "flex"
                 inputOfUstensils.style.display = "none";
             }
         });
 
-        ustensil.appendChild(ulUstensil)
+
         return ustensils
     }
 

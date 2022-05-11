@@ -383,7 +383,7 @@ max-width: 100%; */
 }
 
 .list-ingredient li:hover, .list-ustensil li:hover, .list-appliance li:hover {
-    border-bottom: solid #FFF 1px;
+    /* border-bottom: solid #FFF 1px; */
     cursor: pointer;
 }
 
@@ -405,12 +405,29 @@ max-width: 100%; */
 
 .list-ustensil {
     width: 400px;
+    display: grid;
+    gap: 4%;
+    align-items: center;
+    flex-wrap: nowrap;
+    text-align: left;
 }
 
 .list-appliance {
     width: 278px;
+    display: grid;
+    gap: 4%;
+    align-items: center;
+    flex-wrap: nowrap;
+    text-align: left;
 }
 
+.list-ingredient {
+    display: grid;
+    gap: 4%;
+    align-items: center;
+    flex-wrap: nowrap;
+    text-align: left;
+}
 
 .addTag {
     margin-left: 2%;
@@ -422,13 +439,14 @@ max-width: 100%; */
 
 .addTag button {
     display: flex;
-    flex-wrap: nowrap;
-    width: 130px;
-    justify-content: space-between;
+
+    width: auto;
+
     border: none;
-    height: 37px;
+    height: 40px;
     border-radius: 5px;
     align-items: center;
+    padding: 1%;
 }
 
 .ingredientTag {
@@ -469,4 +487,9 @@ max-width: 100%; */
 
 .input-ingredient {
     background-color: #3282F7;
+}
+
+
+.close-tag {
+    margin-left: 10%;
 }
