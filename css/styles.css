@@ -256,7 +256,6 @@ header h1 {
 .desc-howDo, .ingredient-recipes label {
     width: 100%;
     margin-left: 5%;
-
 }
 
 .ingredient-list {
@@ -265,7 +264,6 @@ header h1 {
     white-space: nowrap;
     align-items: center;
 }
-
 
 .ingredient-recipes div label {
     font-weight: 700;
@@ -315,17 +313,6 @@ header h1 {
     margin-left: 1.8%;
 }
 
-
-/* 
-gap: 2%;
-position: absolute;
-z-index: 2;
-display: grid;
-grid-template-columns: 1fr 1fr 1fr;
-max-width: 100%; */
-
-
-
 .btn {
     width: 170px;
     height: 69px;
@@ -338,7 +325,6 @@ max-width: 100%; */
 .ingredient, .appliance, .ustensil {
     display: flex;
     flex-direction: column;
-    /* width: 30%; */
 }
 
 .input-ustensil input, .input-ingredient input, .input-appliance input {
@@ -348,13 +334,11 @@ max-width: 100%; */
     font-size: 18px;
     background-color: #ED6454;
     color: #fff;
-
 }
 
 .input-ustensil input::placeholder, .input-ingredient input::placeholder, .input-appliance input::placeholder {
     color: #fff;
 }
-
 
 .ingredient button, .ingredient button:hover, .ingredient input, .ingredient input::placeholder, .list-ingredient {
     background-color: #3282F7;
@@ -377,13 +361,12 @@ max-width: 100%; */
     border: none;
 }
 
-
 .list-ingredient li, .list-ustensil li, .list-appliance li {
     list-style-type: none;
+    margin-bottom: 10%;
 }
 
 .list-ingredient li:hover, .list-ustensil li:hover, .list-appliance li:hover {
-    /* border-bottom: solid #FFF 1px; */
     cursor: pointer;
 }
 
@@ -392,7 +375,7 @@ max-width: 100%; */
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     overflow-wrap: break-word;
-    width: 570px;
+    width: 540px;
     max-height: 310px;
     overflow: auto;
     color: white;
@@ -406,16 +389,14 @@ max-width: 100%; */
 .list-ustensil {
     width: 400px;
     display: grid;
-    gap: 4%;
     align-items: center;
     flex-wrap: nowrap;
     text-align: left;
 }
 
 .list-appliance {
-    width: 278px;
+    width: 310px;
     display: grid;
-    gap: 4%;
     align-items: center;
     flex-wrap: nowrap;
     text-align: left;
@@ -423,7 +404,6 @@ max-width: 100%; */
 
 .list-ingredient {
     display: grid;
-    gap: 4%;
     align-items: center;
     flex-wrap: nowrap;
     text-align: left;
@@ -439,9 +419,7 @@ max-width: 100%; */
 
 .addTag button {
     display: flex;
-
     width: auto;
-
     border: none;
     height: 40px;
     border-radius: 5px;
@@ -464,10 +442,6 @@ max-width: 100%; */
     color: #fff;
 }
 
-
-
-
-
 .input-ustensil, .input-appliance, .input-ingredient {
     display: flex;
     align-items: center;
@@ -489,7 +463,6 @@ max-width: 100%; */
     background-color: #3282F7;
 }
 
-
 .close-tag {
-    margin-left: 10%;
+    margin-left: 10px;
 }

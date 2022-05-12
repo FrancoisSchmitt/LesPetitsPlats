@@ -161,6 +161,7 @@ export class Filters {
                 iconAppl.style.display = "flex"
                 iconUpAppl.style.display = "none"
                 inputOfAppliance.style.display = "none";
+                ulOfAppliance.style.display = "none"
             }
         });
         // appliances.appendChild(ulOfAppliance)
@@ -249,6 +250,7 @@ export class Filters {
                 iconUpUst.style.display = "none"
                 iconDownUst.style.display = "flex"
                 inputOfUstensils.style.display = "none";
+                ulUstensil.style.display = "none"
             }
         });
 

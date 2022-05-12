@@ -50,6 +50,8 @@ export function searchBarAlgo() {
 
     }
     else {
+        recipeSearch = recipes
+        newTagTabRecipes = recipes
         tagFilterAlgo();
     }
 }
@@ -95,17 +97,12 @@ export function tagFilterAlgo() {
         });
         new Recipes(newTagTabRecipes);
         newFiltersList(newTagTabRecipes);
-
-        console.log(newTagTabRecipes)
         filter = newTagTabRecipes;
         newTagTabRecipes = recipeSearch;
     }
 
-    else if (inputSearch.length < 3 && allTagsFilters.length === 0) {
-        newFiltersList(recipes)
-    }
-
     else {
+        recipeSearch = recipes
         searchBarAlgo();
     }
 }
