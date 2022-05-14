@@ -14,9 +14,52 @@ import { Filters } from "../template/render-list.js";
 
 let newTagTabRecipes = recipes;
 let recipeSearch = recipes;
-let filter = recipes;
+let recipeFilter = recipes;
+
+
+
+
 export function searchBarAlgo() {
-    const inputSearch = document.querySelector("#search").value.toLowerCase();
+    const searchBarInput = document.querySelector("#search").value.toLowerCase();
+    const AllTagFilters = Array.from(document.querySelectorAll(".addTag button"));
+    const lstIng = document.querySelector(".list-ingredient");
+    lstIng.innerHTML = ""
+    const lstApli = document.querySelector(".list-appliance");
+    lstApli.innerHTML = ""
+    const lstUst = document.querySelector(".list-ustensil");
+    lstUst.innerHTML = ""
+    if (searchBarInput.length > 3) {
+        recipeSearch = recipeFilter.filter(element => {
+            const match = searchBarMatch(searchBarInput, element);
+            if (match == true) {
+                return element;
+            }
+        });
+        if (recipeSearch.length > 0) {
+            new Recipes(recipeSearch);
+            newFiltersList(recipeSearch);
+        }
+        else {
+            const newResultErrorOfRecipes = document.querySelector(".all-recipes")
+            newResultErrorOfRecipes.innerHTML = `<div class="error-recipe">Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc...</div>`;;
+        }
+        newTagTabRecipes = recipeSearch;
+    }
+    else if (searchBarInput.length < 3 && AllTagFilters.length === 0) {
+        new Recipes(recipes);
+        newFiltersList(recipes);
+        newTagTabRecipes = recipes;
+        recipeSearch = recipes;
+    }
+    else {
+        tagFilterAlgo();
+        recipeSearch = recipes;
+        newTagTabRecipes = recipes;
+    }
+}
+
+
+export function tagFilterAlgo() {
     const allTagsFilters = Array.from(document.querySelectorAll(".addTag button"));
     const lstIng = document.querySelector(".list-ingredient");
     lstIng.innerHTML = ""
@@ -24,38 +67,22 @@ export function searchBarAlgo() {
     lstApli.innerHTML = ""
     const lstUst = document.querySelector(".list-ustensil");
     lstUst.innerHTML = ""
-    if (inputSearch.length >= 3) {
-        recipeSearch = recipeSearch.filter(element => {
-            const ifSearchBarMatch = searchBarMatch(inputSearch, element);
-            if (ifSearchBarMatch === true) {
-                console.log(element)
-                return element;
-            }
+    console.log(allTagsFilters)
+    if (allTagsFilters.length > 0) {
+        allTagsFilters.forEach(alltagFitltered => {
+            matchTagAlgo(alltagFitltered);
         });
-        if (recipeSearch.length >= 3) {
-            new Recipes(recipeSearch);
-            newFiltersList(recipeSearch);
-
-        }
-        else {
-            const newResultErrorOfRecipes = document.querySelector(".all-recipes");
-            newResultErrorOfRecipes.textContent = "Aucune recette ne correspond à votre critère... vous pouvez chercher « tarte aux pommes », « poisson », etc...";
-        }
-    }
-    else if (inputSearch.length < 3 && allTagsFilters.length === 0) {
-        newTagTabRecipes = recipes;
-        recipeSearch = recipes
-        new Recipes(recipes)
-        newFiltersList(recipes)
+        new Recipes(newTagTabRecipes);
+        newFiltersList(newTagTabRecipes);
+        recipeFilter = newTagTabRecipes;
+        newTagTabRecipes = recipeSearch;
 
     }
     else {
-        recipeSearch = recipes
-        newTagTabRecipes = recipes
-        tagFilterAlgo();
+        recipeFilter = recipes
+        searchBarAlgo();
     }
 }
-
 
 
 
@@ -68,7 +95,7 @@ function searchBarMatch(inputSearch, recipes) {
     const foundIng = findTheIng(recipes, inputSearch)
     // const foundAppliance = findTheAppliance(recipes, inputSearch)
     // const foundUstensil = findTheUstensil(recipes, inputSearch)
-    if (foundTitle || foundDesc || foundIng === true) {
+    if (foundTitle || foundDesc || foundIng == true) {
         return true;
     }
     else {
@@ -76,44 +103,13 @@ function searchBarMatch(inputSearch, recipes) {
     }
 }
 
-
-
-export function tagFilterAlgo() {
-    const inputSearch = document.querySelector("#search").value.toLowerCase();
-    const allTagsFilters = Array.from(document.querySelectorAll(".addTag button"));
-    const lstIng = document.querySelector(".list-ingredient");
-    lstIng.innerHTML = ""
-    const lstApli = document.querySelector(".list-appliance");
-    lstApli.innerHTML = ""
-    const lstUst = document.querySelector(".list-ustensil");
-    lstUst.innerHTML = ""
-
-
-    console.log(allTagsFilters)
-    if (allTagsFilters.length != 0) {
-        allTagsFilters.forEach(alltagFitltered => {
-
-            matchTagAlgo(alltagFitltered);
-        });
-        new Recipes(newTagTabRecipes);
-        newFiltersList(newTagTabRecipes);
-        filter = newTagTabRecipes;
-        newTagTabRecipes = recipeSearch;
-    }
-
-    else {
-        recipeSearch = recipes
-        searchBarAlgo();
-    }
-}
-
-function matchTagAlgo(dataTag) {
-    const filterTag = dataTag.getAttribute("data-tag");
-    dataTag = dataTag.innerText.toLowerCase();
+function matchTagAlgo(newfilterTag) {
+    const filterTag = newfilterTag.getAttribute("data-tag");
+    newfilterTag = newfilterTag.innerText.toLowerCase();
     switch (filterTag) {
         case "ingredients":
             newTagTabRecipes = newTagTabRecipes.filter(element => {
-                const matchTag = findTheIng(element, dataTag);
+                const matchTag = findTheIng(element, newfilterTag);
                 if (matchTag == true) {
                     return true;
                 }
@@ -121,7 +117,7 @@ function matchTagAlgo(dataTag) {
             break;
         case "ustensil":
             newTagTabRecipes = newTagTabRecipes.filter(element => {
-                const match = findTheUstensil(element, dataTag);
+                const match = findTheUstensil(element, newfilterTag);
                 if (match == true) {
                     return true;
                 }
@@ -129,7 +125,7 @@ function matchTagAlgo(dataTag) {
             break;
         case "appliance":
             newTagTabRecipes = newTagTabRecipes.filter(element => {
-                const matchTag = findTheAppliance(element, dataTag);
+                const matchTag = findTheAppliance(element, newfilterTag);
                 if (matchTag == true) {
                     return true;
                 }
@@ -137,18 +133,6 @@ function matchTagAlgo(dataTag) {
             break;
     }
 }
-
-function newFiltersList(recipes) {
-    const filtersList = new Filters(recipes);
-    const ingredients = filtersList.getIngredients();
-    const appliances = filtersList.getAppliances();
-    const ustensils = filtersList.getUstensils();
-    ingredienTag()
-    ustensilTag()
-    applianceTag()
-
-}
-
 
 function findTheTitle(recipes, data) {
     return recipes.name.toLowerCase().includes(data)
@@ -172,6 +156,17 @@ function findTheUstensil(recipes, data) {
     return recipes.ustensils.some(element => {
         return element.toLowerCase().includes(data)
     })
+}
+
+
+function newFiltersList(recipes) {
+    const filtersList = new Filters(recipes);
+    const ingredients = filtersList.getIngredients();
+    const appliances = filtersList.getAppliances();
+    const ustensils = filtersList.getUstensils();
+    ingredienTag()
+    ustensilTag()
+    applianceTag()
 }
 
 /**
@@ -213,120 +208,6 @@ function findTheUstensil(recipes, data) {
 //  * SECOND ALGO
 //  */
 
-// let newTagTabRecipes = recipes;
-// let recipeSearch = recipes;
-// let filter = recipes;
-// export function searchBarAlgo() {
-//     const inputSearch = document.querySelector("#search").value.toLowerCase();
-//     const allTagsFilters = Array.from(document.querySelectorAll(".addTag button"));
-//     if (inputSearch.length >= 3) {
-//         let result = [];
-//         for (const recipes of recipeSearch) {
-//             const match = searchBarMatch(inputSearch, recipes);
-//             if (match == true) {
-//                 result.push(recipes)
-
-//             }
-//         }
-//         recipeSearch = result
-//         if (recipeSearch.length >= 3) {
-//             new Recipes(recipeSearch);
-//         }
-//         else {
-//             const newResultErrorOfRecipes = document.querySelector(".all-recipes");
-//             newResultErrorOfRecipes.textContent = "Aucune recette ne correspond à votre critère... vous pouvez chercher « tarte aux pommes », « poisson », etc...";
-//         }
-//     }
-//     else if (inputSearch.length < 3 && allTagsFilters.length === 0) {
-//         newTagTabRecipes = recipes;
-//         recipeSearch = recipes
-//         new Recipes(recipes)
-//         // newFiltersList(recipes)
-
-//     }
-//     // else {
-//     //     // tagFilterAlgo();
-//     // }
-// }
-
-
-
-
-// function searchBarMatch(inputSearch, recipes) {
-//     /**
-//      * test de toutes mes fonction de recherche findThe... mais ne garder que celle qui gere les titres, la desc, et les ingrédients
-//      */
-//     const foundTitle = findTheTitle(recipes, inputSearch);
-//     const foundDesc = findTheDesc(recipes, inputSearch);
-//     const foundIng = findTheIng(recipes, inputSearch)
-//     // const foundAppliance = findTheAppliance(recipes, inputSearch)
-//     // const foundUstensil = findTheUstensil(recipes, inputSearch)
-//     if (foundTitle || foundDesc || foundIng == true) {
-//         return true;
-//     }
-//     else {
-//         return false;
-//     }
-// }
-
-
-
-// export function tagFilterAlgo() {
-//     const inputSearch = document.querySelector("#search").value.toLowerCase();
-//     const allTagsFilters = Array.from(document.querySelectorAll(".addTag button"));
-
-
-//     console.log(allTagsFilters)
-//     if (allTagsFilters.length != 0) {
-//         for (filter of allTagsFilters) {
-//             matchTagAlgo(filter);
-//         }
-//         new Recipes(newTagTabRecipes);
-
-//         filter = newTagTabRecipes;
-//         newTagTabRecipes = recipeSearch;
-//     }
-//     else {
-//         searchBarAlgo();
-//     }
-// }
-
-// function matchTagAlgo(dataTag) {
-//     const filterTag = dataTag.getAttribute("data-tag");
-//     dataTag = dataTag.innerText.toLowerCase();
-//     if (filterTag === "ingredients") {
-//         let result = [];
-//         for (const recipes of newTagTabRecipes) {
-//             const match = findTheIng(recipes, dataTag);
-//             if (match === true) {
-//                 result.push(recipes)
-//             }
-//         }
-//         newTagTabRecipes = result;
-//     }
-//     else if (filterTag === "ustensil") {
-//         let result = [];
-//         for (const recipes of newTagTabRecipes) {
-//             const match = findTheUstensil(recipes, dataTag);
-//             if (match === true) {
-//                 result.push(recipes)
-//             }
-//         }
-//         newTagTabRecipes = result;
-//     }
-//     else if (filterTag === "appliance") {
-//         let result = [];
-//         for (const recipes of newTagTabRecipes) {
-//             const match = findTheAppliance(recipes, dataTag);
-//             if (match === true) {
-//                 result.push(recipes)
-//             }
-//         }
-//         newTagTabRecipes = result;
-//     }
-// }
-
-
 
 // function findTheTitle(recipes, data) {
 //     return recipes.name.toLowerCase().includes(data);
@@ -347,8 +228,6 @@ function findTheUstensil(recipes, data) {
 //             return true
 //         }
 //     }
-
-
 // }
 
 // function findTheUstensil(recipes, data) {
@@ -360,22 +239,143 @@ function findTheUstensil(recipes, data) {
 //     }
 // }
 
-// /**
-//  * END OF SECOND ALGO
-//  */
+
+// let newTagTabRecipes = recipes;
+// let recipeSearch = recipes;
+// let filter = recipes;
 
 
 
+// function matchTagAlgo(newfilterTag) {
+//     const filterTag = newfilterTag.getAttribute("data-tag");
+//     newfilterTag = newfilterTag.innerText.toLowerCase();
+//     if (filterTag === "ingredients") {
+//         let result = [];
+//         for (const recipes of newTagTabRecipes) {
+//             const match = findTheIng(recipes, newfilterTag);
+//             if (match === true) {
+//                 result.push(recipes)
+//             }
+//         }
+//         newTagTabRecipes = result;
+//     }
+//     else if (filterTag === "ustensil") {
+//         let result = [];
+//         for (const recipes of newTagTabRecipes) {
+//             const match = findTheUstensil(recipes, newfilterTag);
+//             if (match === true) {
+//                 result.push(recipes)
+//             }
+//         }
+//         newTagTabRecipes = result;
+//     }
+//     else if (filterTag === "appliance") {
+//         let result = [];
+//         for (const recipes of newTagTabRecipes) {
+//             const match = findTheAppliance(recipes, newfilterTag);
+//             if (match === true) {
+//                 result.push(recipes)
+//             }
+//         }
+//         newTagTabRecipes = result;
+//     }
+// }
+
+// function searchBarMatch(inputSearch, recipes) {
+//     /**
+//      * test de toutes mes fonction de recherche findThe... mais ne garder que celle qui gere les titres, la desc, et les ingrédients
+//      */
+//     const foundTitle = findTheTitle(recipes, inputSearch);
+//     const foundDesc = findTheDesc(recipes, inputSearch);
+//     const foundIng = findTheIng(recipes, inputSearch)
+//     // const foundAppliance = findTheAppliance(recipes, inputSearch)
+//     // const foundUstensil = findTheUstensil(recipes, inputSearch)
+//     if (foundTitle || foundDesc || foundIng == true) {
+//         return true;
+//     }
+//     else {
+//         return false;
+//     }
+// }
+
+// export function searchBarAlgo() {
+//     const searchBarInput = document.querySelector("#search").value.toLowerCase();
+//     const filtersDatas = Array.from(document.querySelectorAll(".addTag button"));
+//     const lstIng = document.querySelector(".list-ingredient");
+//     lstIng.innerHTML = ""
+//     const lstApli = document.querySelector(".list-appliance");
+//     lstApli.innerHTML = ""
+//     const lstUst = document.querySelector(".list-ustensil");
+//     lstUst.innerHTML = ""
+//     if (searchBarInput.length > 2) {
+//         let result = [];
+//         for (const recipes of filter) {
+//             const match = searchBarMatch(searchBarInput, recipes);
+//             if (match == true) {
+//                 result.push(recipes);
+//             }
+//         }
+//         recipeSearch = result;
+//         if (recipeSearch.length != 0) {
+//             new Recipes(recipeSearch);
+//             newFiltersList(recipeSearch);
+//         }
+//         else {
+//             const newResultErrorOfRecipes = document.querySelector(".all-recipes")
+//             newResultErrorOfRecipes.innerHTML = `<div class="error-recipe">Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc...</div>`;;
+//         }
+//         newTagTabRecipes = recipeSearch;
+//     }
+//     else if (searchBarInput.length < 3 && filtersDatas.length === 0) {
+//         newTagTabRecipes = recipes;
+//         recipeSearch = recipes;
+//         new Recipes(recipes);
+//         newFiltersList(recipes);
+//     }
+//     else {
+//         recipeSearch = recipes;
+//         newTagTabRecipes = recipes;
+//         tagFilterAlgo();
+//     }
+// }
+
+// export function tagFilterAlgo() {
+//     const inputSearch = document.querySelector("#search").value.toLowerCase();
+//     const allTagsFilters = Array.from(document.querySelectorAll(".addTag button"));
+//     const lstIng = document.querySelector(".list-ingredient");
+//     lstIng.innerHTML = ""
+//     const lstApli = document.querySelector(".list-appliance");
+//     lstApli.innerHTML = ""
+//     const lstUst = document.querySelector(".list-ustensil");
+//     lstUst.innerHTML = ""
+//     console.log(allTagsFilters)
+//     if (allTagsFilters.length != 0) {
+//         for (filter of allTagsFilters) {
+//             matchTagAlgo(filter);
+//         }
+//         new Recipes(newTagTabRecipes);
+//         newFiltersList(newTagTabRecipes);
+//         console.log(newTagTabRecipes)
+//         filter = newTagTabRecipes;
+//         newTagTabRecipes = recipeSearch;
+//     }
+//     else {
+//         recipeSearch = recipes
+//         searchBarAlgo();
+//     }
+// }
+
+// function newFiltersList(recipes) {
+//     const filtersList = new Filters(recipes);
+//     const ingredients = filtersList.getIngredients();
+//     const appliances = filtersList.getAppliances();
+//     const ustensils = filtersList.getUstensils();
+//     ingredienTag()
+//     ustensilTag()
+//     applianceTag()
+// }
 
 
-
-
-
-
-
-
-
-
-
-
-
+/**
+ * END OF SECOND ALGO
+ */

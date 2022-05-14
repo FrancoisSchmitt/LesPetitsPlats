@@ -387,11 +387,12 @@ header h1 {
 }
 
 .list-ustensil {
-    width: 400px;
+    width: 403px;
     display: grid;
     align-items: center;
     flex-wrap: nowrap;
     text-align: left;
+    gap: 1%;
 }
 
 .list-appliance {
@@ -465,4 +466,18 @@ header h1 {
 
 .close-tag {
     margin-left: 10px;
+}
+
+.error {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+
+.error-recipe {
+    display: flex;
+    font-size: 18px;
+    grid-column: 2;
+    position: relative;
+    top: 50px;
 }
