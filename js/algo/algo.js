@@ -4,13 +4,17 @@ import { ingredienTag } from "../utils/add-newtag.js";
 import { ustensilTag } from "../utils/add-newtag.js";
 import { applianceTag } from "../utils/add-newtag.js";
 import { Filters } from "../template/render-list.js";
+// /**
+//  * SECOND ALGO
+//  */
+
 
 let newTagTabRecipes = recipes;
 let recipeSearch = recipes;
-let recipeFilter = recipes;
+let filter = recipes;
 
 function findTheTitle(recipes, data) {
-    return recipes.name.toLowerCase().includes(data)
+    return recipes.name.toLowerCase().includes(data);
 }
 
 function findTheDesc(recipes, data) {
@@ -22,18 +26,57 @@ function findTheAppliance(recipes, data) {
 }
 
 function findTheIng(recipes, data) {
-    return recipes.ingredients.some(element => {
-        return element.ingredient.toLowerCase().includes(data)
-    })
+    const ingredient = recipes.ingredients;
+    for (const element of ingredient) {
+        if (element.ingredient.toLowerCase().includes(data)) {
+            return true
+        }
+    }
 }
 
 function findTheUstensil(recipes, data) {
-    return recipes.ustensils.some(element => {
-        return element.toLowerCase().includes(data)
-    })
+    const ustensil = recipes.ustensils;
+    for (const element of ustensil) {
+        if (element.toLowerCase().includes(data)) {
+            return true
+        }
+    }
 }
 
-
+function matchTagAlgo(newfilterTag) {
+    const filterTag = newfilterTag.getAttribute("data-tag");
+    newfilterTag = newfilterTag.innerText.toLowerCase();
+    if (filterTag === "ingredients") {
+        let result = [];
+        for (const recipes of newTagTabRecipes) {
+            const match = findTheIng(recipes, newfilterTag);
+            if (match === true) {
+                result.push(recipes)
+            }
+        }
+        newTagTabRecipes = result;
+    }
+    else if (filterTag === "ustensil") {
+        let result = [];
+        for (const recipes of newTagTabRecipes) {
+            const match = findTheUstensil(recipes, newfilterTag);
+            if (match === true) {
+                result.push(recipes)
+            }
+        }
+        newTagTabRecipes = result;
+    }
+    else if (filterTag === "appliance") {
+        let result = [];
+        for (const recipes of newTagTabRecipes) {
+            const match = findTheAppliance(recipes, newfilterTag);
+            if (match === true) {
+                result.push(recipes)
+            }
+        }
+        newTagTabRecipes = result;
+    }
+}
 
 function searchBarMatch(inputSearch, recipes) {
     /**
@@ -52,54 +95,25 @@ function searchBarMatch(inputSearch, recipes) {
     }
 }
 
-function matchTagAlgo(newfilterTag) {
-    const filterTag = newfilterTag.getAttribute("data-tag");
-    newfilterTag = newfilterTag.innerText.toLowerCase();
-    switch (filterTag) {
-        case "ingredients":
-            newTagTabRecipes = newTagTabRecipes.filter(element => {
-                const matchTag = findTheIng(element, newfilterTag);
-                if (matchTag == true) {
-                    return true;
-                }
-            });
-            break;
-        case "ustensil":
-            newTagTabRecipes = newTagTabRecipes.filter(element => {
-                const match = findTheUstensil(element, newfilterTag);
-                if (match == true) {
-                    return true;
-                }
-            });
-            break;
-        case "appliance":
-            newTagTabRecipes = newTagTabRecipes.filter(element => {
-                const matchTag = findTheAppliance(element, newfilterTag);
-                if (matchTag == true) {
-                    return true;
-                }
-            });
-            break;
-    }
-}
-
 export function searchBarAlgo() {
     const searchBarInput = document.querySelector("#search").value.toLowerCase();
-    const AllTagFilters = Array.from(document.querySelectorAll(".addTag button"));
+    const filtersDatas = Array.from(document.querySelectorAll(".addTag button"));
     const lstIng = document.querySelector(".list-ingredient");
     lstIng.innerHTML = ""
     const lstApli = document.querySelector(".list-appliance");
     lstApli.innerHTML = ""
     const lstUst = document.querySelector(".list-ustensil");
     lstUst.innerHTML = ""
-    if (searchBarInput.length > 3) {
-        recipeSearch = recipeFilter.filter(element => {
-            const match = searchBarMatch(searchBarInput, element);
+    if (searchBarInput.length > 2) {
+        let result = [];
+        for (const recipes of filter) {
+            const match = searchBarMatch(searchBarInput, recipes);
             if (match == true) {
-                return element;
+                result.push(recipes);
             }
-        });
-        if (recipeSearch.length > 0) {
+        }
+        recipeSearch = result;
+        if (recipeSearch.length != 0) {
             new Recipes(recipeSearch);
             newFiltersList(recipeSearch);
         }
@@ -109,20 +123,21 @@ export function searchBarAlgo() {
         }
         newTagTabRecipes = recipeSearch;
     }
-    else if (searchBarInput.length < 3 && AllTagFilters.length === 0) {
+    else if (searchBarInput.length < 3 && filtersDatas.length === 0) {
+        newTagTabRecipes = recipes;
+        recipeSearch = recipes;
         new Recipes(recipes);
         newFiltersList(recipes);
-        newTagTabRecipes = recipes;
-        recipeSearch = recipes;
     }
     else {
-        tagFilterAlgo();
         recipeSearch = recipes;
         newTagTabRecipes = recipes;
+        tagFilterAlgo();
     }
 }
 
 export function tagFilterAlgo() {
+    const inputSearch = document.querySelector("#search").value.toLowerCase();
     const allTagsFilters = Array.from(document.querySelectorAll(".addTag button"));
     const lstIng = document.querySelector(".list-ingredient");
     lstIng.innerHTML = ""
@@ -131,18 +146,18 @@ export function tagFilterAlgo() {
     const lstUst = document.querySelector(".list-ustensil");
     lstUst.innerHTML = ""
     console.log(allTagsFilters)
-    if (allTagsFilters.length > 0) {
-        allTagsFilters.forEach(alltagFitltered => {
-            matchTagAlgo(alltagFitltered);
-        });
+    if (allTagsFilters.length != 0) {
+        for (filter of allTagsFilters) {
+            matchTagAlgo(filter);
+        }
         new Recipes(newTagTabRecipes);
         newFiltersList(newTagTabRecipes);
-        recipeFilter = newTagTabRecipes;
+        console.log(newTagTabRecipes)
+        filter = newTagTabRecipes;
         newTagTabRecipes = recipeSearch;
-
     }
     else {
-        recipeFilter = recipes
+        recipeSearch = recipes
         searchBarAlgo();
     }
 }
