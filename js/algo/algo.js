@@ -92,7 +92,7 @@ export function searchBarAlgo() {
     lstApli.innerHTML = ""
     const lstUst = document.querySelector(".list-ustensil");
     lstUst.innerHTML = ""
-    if (searchBarInput.length > 3) {
+    if (searchBarInput.length > 2) {
         recipeSearch = recipeFilter.filter(element => {
             const match = searchBarMatch(searchBarInput, element);
             if (match == true) {
