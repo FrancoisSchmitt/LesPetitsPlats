@@ -119,7 +119,7 @@ export function searchBarAlgo() {
         }
         else {
             const newResultErrorOfRecipes = document.querySelector(".all-recipes")
-            newResultErrorOfRecipes.innerHTML = `<div class="error-recipe">Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc...</div>`;;
+            newResultErrorOfRecipes.innerHTML = `<div class="error-recipe">Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc...</div>`;
         }
         newTagTabRecipes = recipeSearch;
     }
